@@ -14,7 +14,7 @@ function App() {
      <Routes>
       <Route path = "/" Component={homepage}/>
       
-     <Route path = "/chats/"Component={Chatpage}/>
+     <Route path = "/chat/"Component={Chatpage}/>
      </Routes>
     </div>
     
