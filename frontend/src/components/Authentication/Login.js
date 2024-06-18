@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
+    
     const[email, setEmail] =  useState();
     const[password, setPassword] =  useState();
     const[show, setShow] =  useState(false);
@@ -38,6 +39,7 @@ const Login = () => {
                 };
                 const data = await axios.post("/api/user/login", {  email , password}, 
                     config);
+                    
         toast({
           title: "Login Successful!.",
           status: 'success',

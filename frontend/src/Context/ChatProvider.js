@@ -13,10 +13,10 @@ const ChatProvider = ({children}) => {
         setUser(userInfo);
 
         if(!userInfo){
-            navigate("/");
+            navigate("/" , {replace : true});
         }
 
-    } , [navigate])
+    } , [navigate , {replace : true}])
 
     return(
         <ChatContext.Provider value={{user , setUser}}>

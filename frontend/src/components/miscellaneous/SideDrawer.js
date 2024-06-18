@@ -1,13 +1,29 @@
 import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import { Box, Text } from "@chakra-ui/layout";
-import { Avatar, Button, Menu, MenuButton, Tooltip } from "@chakra-ui/react";
+import { Avatar, Button, Drawer, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Tooltip, useDisclosure } from "@chakra-ui/react";
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ChatState } from "../../Context/ChatProvider";
+import ProfileModel from "./ProfileModel";
+
+
 const SideDrawer = () => {
 
   const [search , setSearch] = useState("");
   const [searchResult , setSearchResult] = useState([]);
   const [loading , setLoading] = useState(false);
   const [loadingChat , setLoadingChat] = useState();
+  const navigate = useNavigate();
+  const { user } = ChatState()
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  
+
+  const LogOutHandler = () => {
+    
+    localStorage.removeItem("userInfo");
+    navigate("/")
+  };
+  
 
 
   return  <>
@@ -42,11 +58,24 @@ const SideDrawer = () => {
 
         <Menu>
             <MenuButton as= {Button} rightIcon={<ChevronDownIcon/>}>
-              <Avatar size="sm" cursor='pointer'/>
+              <Avatar size="sm" cursor="pointer" name={user.data.name} src={user.data.pic}/>
+          
+
           </MenuButton>
+          <MenuList>
+            <ProfileModel user = {user}>
+            <MenuItem>My Profile</MenuItem>
+            </ProfileModel>
+            <MenuDivider/>
+            <MenuItem onClick={LogOutHandler}>Log Out</MenuItem>
+          </MenuList>
         </Menu>
       </div>
     </Box>
+
+    <Drawer placement="left" >
+
+    </Drawer>
   </>
   
 };

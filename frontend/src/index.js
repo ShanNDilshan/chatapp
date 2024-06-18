@@ -10,12 +10,17 @@ const root = createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <ChatProvider>
+  
+    
+      <BrowserRouter>
         <ChakraProvider>
+          <ChatProvider>
           <App />
+          </ChatProvider>
         </ChakraProvider>
-      </ChatProvider>
-    </BrowserRouter>
+      </BrowserRouter>
+    
+    
+  
   </React.StrictMode>
 );
