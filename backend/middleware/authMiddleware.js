@@ -1,4 +1,4 @@
-
+const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");
 
 const protect = asyncHandler(async(req , res , next) => {
@@ -9,15 +9,14 @@ const protect = asyncHandler(async(req , res , next) => {
     ){
         try{
             token = req.headers.authorization.split(" ")[1];
-
             // Await the import of jsonwebtoken and User model
-            const { default: jwt } = await import('jsonwebtoken');
+            //const { default: jwt } = await import('jsonwebtoken');
             const { default: User } = await import('../Models/userModel.js');
 
             //decode the token id
 
-            const decoded =  jwt.verify(token , process.env.JWT_SECRET);
-            
+            const decoded =  jwt.verify(token, process.env.JWT_SECRET);
+
             req.user = await User.findById(decoded.id).select("-password");
             next();
         }catch(err){
