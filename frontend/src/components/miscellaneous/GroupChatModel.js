@@ -32,7 +32,7 @@ const GroupChatModel = ({children}) => {
           };
       
       const {data} = await axios.get(`/api/user?search=${search}`, config);
-      console.log("Data is : ", data);
+      
       setLoading(false);
       setSearchResults(data);
 

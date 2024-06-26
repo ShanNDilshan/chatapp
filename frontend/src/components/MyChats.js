@@ -102,7 +102,7 @@ const MyChats = ({fetchAgain}) => {
                   borderRadius="lg"
                   key={chat._id}
                   >
-                    {console.log("Chat is : " , chat)}
+                  
                     
                    <Text>
                     
