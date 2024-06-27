@@ -84,7 +84,6 @@ const SideDrawer = () => {
         if(!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
       console.log("METHANATA AWA!!");
       setSelectedChat(data);
-      console.log(data);
       setLoadingChat(false);
       onClose();
     } catch (error) {
