@@ -5,6 +5,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChatState } from "../../Context/ChatProvider";
+import { getSender } from "../../config/ChatLogics";
 import UserListItem from "../UserAvetar/UserListItem";
 import ProfileModel from "./ProfileModel";
 
@@ -20,7 +21,7 @@ const SideDrawer = () => {
   const [loadingChat , setLoadingChat] = useState();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
-  const { user , setSelectedChat, chats , setChats } = ChatState();
+  const { user , setSelectedChat, chats , setChats , notification , setNotification } = ChatState();
   
   
 
@@ -126,8 +127,25 @@ const SideDrawer = () => {
             <BellIcon fontSize="2xl" margin={1}/>
 
           </MenuButton>
+
           
-          {/* <MenuList></MenuList> */}
+          <MenuList>
+            {
+              !notification.length && "No New Messages"
+            }
+            {
+              notification.map(notify => (
+                <MenuItem key={notify._id} onClick={()=>{
+                  setSelectedChat(notify.chat);
+                  setNotification(notification.filter((n) => n !== notify));
+                }}>
+                  {notify.chat.isGroupChat?`New Message in ${notify.chat.chatName}`
+                  :
+                  `New Message from ${getSender(user , notify.chat.users)}`}
+                </MenuItem>
+              ))
+            }
+            </MenuList>
         </Menu>
 
         <Menu>
